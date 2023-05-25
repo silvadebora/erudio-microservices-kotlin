@@ -16,7 +16,6 @@ class MathController (
 
     val counter: AtomicLong = AtomicLong()
 
-
     @RequestMapping(value = ["/sum/{numberOne}/{numberTwo}"])
     fun sum(@PathVariable(value = "numberOne") numberOne: String?,
             @PathVariable(value = "numberTwo") numberTwo: String?)
@@ -24,7 +23,7 @@ class MathController (
 
         if (!mathService.isNumeric(numberOne) || !mathService.isNumeric(numberTwo))
             throw UnsupportedMathOperationException("Please set a numeric value!")
-        return mathService.convertDouble(numberOne) + mathService.convertDouble(numberTwo)
+        return mathService.sum(mathService.convertDouble(numberOne), mathService.convertDouble(numberTwo))
     }
     @RequestMapping(value = ["/sub/{numberOne}/{numberTwo}"])
     fun sub(@PathVariable(value = "numberOne") numberOne: String?,
@@ -32,7 +31,7 @@ class MathController (
     : Double{
         if (!mathService.isNumeric(numberOne) || !mathService.isNumeric(numberTwo))
             throw UnsupportedMathOperationException("Please set a numeric value!")
-        return mathService.convertDouble(numberOne) - mathService.convertDouble(numberTwo)
+        return mathService.sub(mathService.convertDouble(numberOne), mathService.convertDouble(numberTwo))
     }
     @RequestMapping(value = ["/mult/{numberOne}/{numberTwo}"])
     fun multi(@PathVariable(value = "numberOne") numberOne: String?,
@@ -41,7 +40,7 @@ class MathController (
 
         if (!mathService.isNumeric(numberOne) || !mathService.isNumeric(numberTwo))
             throw UnsupportedMathOperationException("Please set a numeric value!")
-        return mathService.convertDouble(numberOne) * mathService.convertDouble(numberTwo)
+        return mathService.mult(mathService.convertDouble(numberOne), mathService.convertDouble(numberTwo))
     }
     @RequestMapping(value = ["/div/{numberOne}/{numberTwo}"])
     fun div(@PathVariable(value = "numberOne") numberOne: String?,
@@ -49,7 +48,7 @@ class MathController (
     : Double{
         if (!mathService.isNumeric(numberOne) || !mathService.isNumeric(numberTwo))
             throw UnsupportedMathOperationException("Please set a numeric value!")
-        return mathService.convertDouble(numberOne) * mathService.convertDouble(numberTwo)
+        return mathService.div(mathService.convertDouble(numberOne), mathService.convertDouble(numberTwo))
     }
     @RequestMapping(value = ["/avg/{numberOne}/{numberTwo}"])
     fun avg(@PathVariable(value = "numberOne") numberOne: String?,
@@ -57,14 +56,14 @@ class MathController (
     : Double{
         if (!mathService.isNumeric(numberOne) || !mathService.isNumeric(numberTwo))
             throw UnsupportedMathOperationException("Please set a numeric value!")
-        return (mathService.convertDouble(numberOne) + mathService.convertDouble(numberTwo)) / 2
+        return mathService.avg(mathService.convertDouble(numberOne), mathService.convertDouble(numberTwo))
     }
     @RequestMapping(value = ["/square/{number}"])
     fun square(@PathVariable(value = "number") number: String?)
     : Double{
         if (!mathService.isNumeric(number))
             throw UnsupportedMathOperationException("Please set a numeric value!")
-        return sqrt(mathService.convertDouble(number))
+        return mathService.square(mathService.convertDouble(number))
     }
 
 }
