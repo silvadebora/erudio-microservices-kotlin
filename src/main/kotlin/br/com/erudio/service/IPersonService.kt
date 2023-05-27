@@ -1,6 +1,6 @@
 package br.com.erudio.service
 
-interface IMathService {
+interface IPersonService {
 
     fun isNumeric(strNumber: String?): Boolean
 
